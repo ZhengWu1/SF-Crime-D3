@@ -1,95 +1,108 @@
 <html>
 
 <head>
+	<link rel="stylesheet" href="interface.css">
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
  	<script src="https://d3js.org/d3.v3.min.js"> </script>
  
  	<div id="svg-col"> 
- 		<h2>Map</h2> 
+ 		<h2>San Francisco Crimes Data</h2>
+ 		<h4>An interactive visualization designed by Zheng Wu and Joanne Jang</h4>
  		<p>
-			<label for="nRadiusA" 
-			     style="display: inline-block; width: 140px; text-align: right">
-			     Radius A = <span id="nRadiusA-value"> </span>
-			</label>
-			<input type="range" min="1" max="15" step="0.1" id="nRadiusA">
-			<label for="nRadiusB" 
-			     style="display: inline-block; width: 140px; text-align: right">
-			     Radius B = <span id="nRadiusB-value"> </span>
-			</label>
-			<input type="range" min="1" max="15" step="0.1" id="nRadiusB">
-			<label style="display: inline-block; width: 140px; text-align: right">
-			     Day of Week
-			</label>
-			<select id="day_of_week">
-				<option value="all" selected="selected">All</option>
-				<option value="Monday">Monday</option> 
-				<option value="Tuesday">Tuesday</option>
-				<option value="Wednesday">Wednesday</option>
-				<option value="Thursday">Thursday</option>
-				<option value="Friday">Friday</option>
-				<option value="Saturday">Saturday</option>
-				<option value="Sunday">Sunday</option>
-  			</select>  
-  			<label style="display: inline-block; width: 140px; text-align: right">
-			     Resolution
-			</label>
-				<select id="resolution">
-				<option value="all" selected="selected">All</option>
-				<option value="ARREST, BOOKED">ARREST, BOOKED</option> 
-				<option value="ARREST, CITED">ARREST, CITED</option> 
-				<option value="CLEARED-CONTACT JUVENILE FOR MORE INFO">CLEARED-CONTACT JUVENILE FOR MORE INFO</option>
-				<option value="COMPLAINANT REFUSES TO PROSECUTE">COMPLAINANT REFUSES TO PROSECUTE</option>
-				<option value="EXCEPTIONAL CLEARANCE">EXCEPTIONAL CLEARANCE</option>
-				<option value="JUVENILE BOOKED">JUVENILE BOOKED</option>
-				<option value="LOCATED">LOCATED</option>
-				<option value="NONE">NONE</option>
-				<option value="NOT PROSECUTED">NOT PROSECUTED</option>
-				<option value="PSYCHOPATHIC CASE">PSYCHOPATHIC CASE</option>
-				<option value="UNFOUNDED">UNFOUNDED</option>
-  			</select> 
-  			<label style="display: inline-block; width: 140px; text-align: right">
-			     Category
-			</label>
-				<select id="category">
-				<option value="all" selected="selected">All</option>
-				<option value="ARSON">ARSON</option> 
-				<option value="ASSAULT">ASSAULT</option> 
-				<option value="BRIBERY">BRIBERY</option>
-				<option value="BURGLARY">BURGLARY</option>
-				<option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
-				<option value="DRIVING UNDER THE INFLUENCE">DRIVING UNDER THE INFLUENCE</option>
-				<option value="DRUG/NARCOTIC">DRUG/NARCOTIC</option>
-				<option value="DRUNKENNESS">DRUNKENNESS</option>
-				<option value="EMBEZZLEMENT">EMBEZZLEMENT</option>
-				<option value="EXTORTION">EXTORTION</option>
-				<option value="FAMILY OFFENSES">FAMILY OFFENSES</option>
-				<option value="FORGERY/COUNTERFEITING">FORGERY/COUNTERFEITING</option>
-				<option value="FRAUD">FRAUD</option>
-				<option value="GAMBLING">GAMBLING</option>
-				<option value="KIDNAPPING">KIDNAPPING</option>
-				<option value="LARCENY/THEFT">LARCENY/THEFT</option>
-				<option value="LIQUOR LAWS">LIQUOR LAWS</option>
-				<option value="LOITERING">LOITERING</option>
-				<option value="MISSING PERSON">MISSING PERSON</option>
-				<option value="NON-CRIMINAL">NON-CRIMINAL</option>
-				<option value="OTHER OFFENSES">OTHER OFFENSES</option>
-				<option value="PROSTITUTION">PROSTITUTION</option>
-				<option value="ROBBERY">ROBBERY</option>
-				<option value="RUNAWAY">RUNAWAY</option>
-				<option value="SECONDARY CODES">SECONDARY CODES</option>
-				<option value="SEX OFFENSES, FORCIBLE">SEX OFFENSES, FORCIBLE</option>
-				<option value="SEX OFFENSES, NON FORCIBLE">SEX OFFENSES, NON FORCIBLE</option>
-				<option value="STOLEN PROPERTY">STOLEN PROPERTY</option>
-				<option value="SUICIDE">SUICIDE</option>
-				<option value="SUSPICIOUS OCC">SUSPICIOUS OCC</option>
-				<option value="TRESPASS">TRESPASS</option>
-				<option value="VANDALISM">VANDALISM</option>
-				<option value="VEHICLE THEFT">VEHICLE THEFT</option>
-				<option value="WARRANTS">WARRANTS</option>
-				<option value="WEAPON LAWS">WEAPON LAWS</option>
-  			</select>
+ 			<div>Specify the radius for each location:</div>
+ 			<div>
+				<label for="nRadiusA" 
+				     style="display: inline-block; width: 140px; text-align: right">
+				     Radius A = <span id="nRadiusA-value"> </span>
+				</label>
+				<input type="range" min="1" max="15" step="0.1" id="nRadiusA">
+			</div>
+			<div>
+				<label for="nRadiusB" 
+				     style="display: inline-block; width: 140px; text-align: right">
+				     Radius B = <span id="nRadiusB-value"> </span>
+				</label>
+				<input type="range" min="1" max="15" step="0.1" id="nRadiusB">
+			</div>
+		</p>
+		<p>
+			<div>Additional Filters:</div>
+			<div>
+				<label style="display: inline-block; width: 140px; text-align: right">
+				     Day of Week
+				</label>
+				<select id="day_of_week">
+					<option value="all" selected="selected">All</option>
+					<option value="Monday">Monday</option> 
+					<option value="Tuesday">Tuesday</option>
+					<option value="Wednesday">Wednesday</option>
+					<option value="Thursday">Thursday</option>
+					<option value="Friday">Friday</option>
+					<option value="Saturday">Saturday</option>
+					<option value="Sunday">Sunday</option>
+	  			</select>  
+	  			<label style="display: inline-block; width: 140px; text-align: right">
+				     Resolution
+				</label>
+					<select id="resolution">
+					<option value="all" selected="selected">All</option>
+					<option value="ARREST, BOOKED">ARREST, BOOKED</option> 
+					<option value="ARREST, CITED">ARREST, CITED</option> 
+					<option value="CLEARED-CONTACT JUVENILE FOR MORE INFO">CLEARED-CONTACT JUVENILE FOR MORE INFO</option>
+					<option value="COMPLAINANT REFUSES TO PROSECUTE">COMPLAINANT REFUSES TO PROSECUTE</option>
+					<option value="EXCEPTIONAL CLEARANCE">EXCEPTIONAL CLEARANCE</option>
+					<option value="JUVENILE BOOKED">JUVENILE BOOKED</option>
+					<option value="LOCATED">LOCATED</option>
+					<option value="NONE">NONE</option>
+					<option value="NOT PROSECUTED">NOT PROSECUTED</option>
+					<option value="PSYCHOPATHIC CASE">PSYCHOPATHIC CASE</option>
+					<option value="UNFOUNDED">UNFOUNDED</option>
+	  			</select> 
+	  			<label style="display: inline-block; width: 140px; text-align: right">
+				     Category
+				</label>
+					<select id="category">
+					<option value="all" selected="selected">All</option>
+					<option value="ARSON">ARSON</option> 
+					<option value="ASSAULT">ASSAULT</option> 
+					<option value="BRIBERY">BRIBERY</option>
+					<option value="BURGLARY">BURGLARY</option>
+					<option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
+					<option value="DRIVING UNDER THE INFLUENCE">DRIVING UNDER THE INFLUENCE</option>
+					<option value="DRUG/NARCOTIC">DRUG/NARCOTIC</option>
+					<option value="DRUNKENNESS">DRUNKENNESS</option>
+					<option value="EMBEZZLEMENT">EMBEZZLEMENT</option>
+					<option value="EXTORTION">EXTORTION</option>
+					<option value="FAMILY OFFENSES">FAMILY OFFENSES</option>
+					<option value="FORGERY/COUNTERFEITING">FORGERY/COUNTERFEITING</option>
+					<option value="FRAUD">FRAUD</option>
+					<option value="GAMBLING">GAMBLING</option>
+					<option value="KIDNAPPING">KIDNAPPING</option>
+					<option value="LARCENY/THEFT">LARCENY/THEFT</option>
+					<option value="LIQUOR LAWS">LIQUOR LAWS</option>
+					<option value="LOITERING">LOITERING</option>
+					<option value="MISSING PERSON">MISSING PERSON</option>
+					<option value="NON-CRIMINAL">NON-CRIMINAL</option>
+					<option value="OTHER OFFENSES">OTHER OFFENSES</option>
+					<option value="PROSTITUTION">PROSTITUTION</option>
+					<option value="ROBBERY">ROBBERY</option>
+					<option value="RUNAWAY">RUNAWAY</option>
+					<option value="SECONDARY CODES">SECONDARY CODES</option>
+					<option value="SEX OFFENSES, FORCIBLE">SEX OFFENSES, FORCIBLE</option>
+					<option value="SEX OFFENSES, NON FORCIBLE">SEX OFFENSES, NON FORCIBLE</option>
+					<option value="STOLEN PROPERTY">STOLEN PROPERTY</option>
+					<option value="SUICIDE">SUICIDE</option>
+					<option value="SUSPICIOUS OCC">SUSPICIOUS OCC</option>
+					<option value="TRESPASS">TRESPASS</option>
+					<option value="VANDALISM">VANDALISM</option>
+					<option value="VEHICLE THEFT">VEHICLE THEFT</option>
+					<option value="WARRANTS">WARRANTS</option>
+					<option value="WEAPON LAWS">WEAPON LAWS</option>
+	  			</select>
+	  		</div>
 		</p>
  	</div>
 
