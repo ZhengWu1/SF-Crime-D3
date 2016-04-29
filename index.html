@@ -3,6 +3,11 @@
 <head>
 	<link rel="stylesheet" href="interface.css">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+	<!--  last three lines -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script> 
+    <script type="text/javascript" src="jquery.tipsy.js"></script>
+    <link href="tipsy.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -10,99 +15,109 @@
  
  	<div id="svg-col"> 
  		<h2>San Francisco Crimes Data</h2>
- 		<h4>An interactive visualization designed by Zheng Wu and Joanne Jang</h4>
+ 		<h4>An interactive visualization designed by Zheng Wu and Joanne Jang for CS 448B</h4>
  		<p>
- 			<div>Specify the radius for each location:</div>
- 			<div>
-				<label for="nRadiusA" 
-				     style="display: inline-block; width: 140px; text-align: right">
-				     Radius A = <span id="nRadiusA-value"> </span>
-				</label>
-				<input type="range" min="1" max="15" step="0.1" id="nRadiusA">
-			</div>
-			<div>
-				<label for="nRadiusB" 
-				     style="display: inline-block; width: 140px; text-align: right">
-				     Radius B = <span id="nRadiusB-value"> </span>
-				</label>
-				<input type="range" min="1" max="15" step="0.1" id="nRadiusB">
-			</div>
-		</p>
-		<p>
-			<div>Additional Filters:</div>
-			<div>
-				<label style="display: inline-block; width: 140px; text-align: right">
-				     Day of Week
-				</label>
-				<select id="day_of_week">
-					<option value="all" selected="selected">All</option>
-					<option value="Monday">Monday</option> 
-					<option value="Tuesday">Tuesday</option>
-					<option value="Wednesday">Wednesday</option>
-					<option value="Thursday">Thursday</option>
-					<option value="Friday">Friday</option>
-					<option value="Saturday">Saturday</option>
-					<option value="Sunday">Sunday</option>
-	  			</select>  
-	  			<label style="display: inline-block; width: 140px; text-align: right">
-				     Resolution
-				</label>
-					<select id="resolution">
-					<option value="all" selected="selected">All</option>
-					<option value="ARREST, BOOKED">ARREST, BOOKED</option> 
-					<option value="ARREST, CITED">ARREST, CITED</option> 
-					<option value="CLEARED-CONTACT JUVENILE FOR MORE INFO">CLEARED-CONTACT JUVENILE FOR MORE INFO</option>
-					<option value="COMPLAINANT REFUSES TO PROSECUTE">COMPLAINANT REFUSES TO PROSECUTE</option>
-					<option value="EXCEPTIONAL CLEARANCE">EXCEPTIONAL CLEARANCE</option>
-					<option value="JUVENILE BOOKED">JUVENILE BOOKED</option>
-					<option value="LOCATED">LOCATED</option>
-					<option value="NONE">NONE</option>
-					<option value="NOT PROSECUTED">NOT PROSECUTED</option>
-					<option value="PSYCHOPATHIC CASE">PSYCHOPATHIC CASE</option>
-					<option value="UNFOUNDED">UNFOUNDED</option>
-	  			</select> 
-	  			<label style="display: inline-block; width: 140px; text-align: right">
-				     Category
-				</label>
-					<select id="category">
-					<option value="all" selected="selected">All</option>
-					<option value="ARSON">ARSON</option> 
-					<option value="ASSAULT">ASSAULT</option> 
-					<option value="BRIBERY">BRIBERY</option>
-					<option value="BURGLARY">BURGLARY</option>
-					<option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
-					<option value="DRIVING UNDER THE INFLUENCE">DRIVING UNDER THE INFLUENCE</option>
-					<option value="DRUG/NARCOTIC">DRUG/NARCOTIC</option>
-					<option value="DRUNKENNESS">DRUNKENNESS</option>
-					<option value="EMBEZZLEMENT">EMBEZZLEMENT</option>
-					<option value="EXTORTION">EXTORTION</option>
-					<option value="FAMILY OFFENSES">FAMILY OFFENSES</option>
-					<option value="FORGERY/COUNTERFEITING">FORGERY/COUNTERFEITING</option>
-					<option value="FRAUD">FRAUD</option>
-					<option value="GAMBLING">GAMBLING</option>
-					<option value="KIDNAPPING">KIDNAPPING</option>
-					<option value="LARCENY/THEFT">LARCENY/THEFT</option>
-					<option value="LIQUOR LAWS">LIQUOR LAWS</option>
-					<option value="LOITERING">LOITERING</option>
-					<option value="MISSING PERSON">MISSING PERSON</option>
-					<option value="NON-CRIMINAL">NON-CRIMINAL</option>
-					<option value="OTHER OFFENSES">OTHER OFFENSES</option>
-					<option value="PROSTITUTION">PROSTITUTION</option>
-					<option value="ROBBERY">ROBBERY</option>
-					<option value="RUNAWAY">RUNAWAY</option>
-					<option value="SECONDARY CODES">SECONDARY CODES</option>
-					<option value="SEX OFFENSES, FORCIBLE">SEX OFFENSES, FORCIBLE</option>
-					<option value="SEX OFFENSES, NON FORCIBLE">SEX OFFENSES, NON FORCIBLE</option>
-					<option value="STOLEN PROPERTY">STOLEN PROPERTY</option>
-					<option value="SUICIDE">SUICIDE</option>
-					<option value="SUSPICIOUS OCC">SUSPICIOUS OCC</option>
-					<option value="TRESPASS">TRESPASS</option>
-					<option value="VANDALISM">VANDALISM</option>
-					<option value="VEHICLE THEFT">VEHICLE THEFT</option>
-					<option value="WARRANTS">WARRANTS</option>
-					<option value="WEAPON LAWS">WEAPON LAWS</option>
-	  			</select>
-	  		</div>
+ 			<div id="user-control">
+	 			<div><b>Specify the radius for each location:</b></div>
+	 			<div>
+					<label for="nRadiusA" 
+					     style="display: inline-block; width: 140px; text-align: center">
+					     Radius A: <span id="nRadiusA-value"> </span>
+					</label>
+					1 <input type="range" min="1" max="5" step="0.1" id="nRadiusA"> 5
+				</div>
+
+				<div>
+					<label for="nRadiusB" 
+					     style="display: inline-block; width: 140px; text-align: center">
+					     Radius B: <span id="nRadiusB-value"> </span>
+					</label>
+					1 <input type="range" min="1" max="5" step="0.1" id="nRadiusB"> 5
+				</div>
+			</p>
+			<p>
+				<div><b>Additional Filters:</b></div>
+				<div>
+					<label style="display: inline-block; width: 100px; text-align: left">
+					     Day of Week
+					</label>
+					<select id="day_of_week">
+						<option value="all" selected="selected">All</option>
+						<option value="Sunday">Sunday</option>
+						<option value="Monday">Monday</option> 
+						<option value="Tuesday">Tuesday</option>
+						<option value="Wednesday">Wednesday</option>
+						<option value="Thursday">Thursday</option>
+						<option value="Friday">Friday</option>
+						<option value="Saturday">Saturday</option>
+
+		  			</select>  
+		  		</div>
+
+				<div>
+		  			<label style="display: inline-block; width: 100px; text-align: left">
+					     Resolution
+					</label>
+						<select id="resolution">
+						<option value="all" selected="selected">All</option>
+						<option value="ARREST, BOOKED">ARREST, BOOKED</option> 
+						<option value="ARREST, CITED">ARREST, CITED</option> 
+						<option value="CLEARED-CONTACT JUVENILE FOR MORE INFO">CLEARED-CONTACT JUVENILE FOR MORE INFO</option>
+						<option value="COMPLAINANT REFUSES TO PROSECUTE">COMPLAINANT REFUSES TO PROSECUTE</option>
+						<option value="EXCEPTIONAL CLEARANCE">EXCEPTIONAL CLEARANCE</option>
+						<option value="JUVENILE BOOKED">JUVENILE BOOKED</option>
+						<option value="LOCATED">LOCATED</option>
+						<option value="NONE">NONE</option>
+						<option value="NOT PROSECUTED">NOT PROSECUTED</option>
+						<option value="PSYCHOPATHIC CASE">PSYCHOPATHIC CASE</option>
+						<option value="UNFOUNDED">UNFOUNDED</option>
+		  			</select>
+		  		</div>
+				<div>
+		  			<label style="display: inline-block; width: 100px; text-align: left">
+					     Category
+					</label>
+						<select id="category">
+						<option value="all" selected="selected">All</option>
+						<option value="ARSON">ARSON</option> 
+						<option value="ASSAULT">ASSAULT</option> 
+						<option value="BRIBERY">BRIBERY</option>
+						<option value="BURGLARY">BURGLARY</option>
+						<option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
+						<option value="DRIVING UNDER THE INFLUENCE">DRIVING UNDER THE INFLUENCE</option>
+						<option value="DRUG/NARCOTIC">DRUG/NARCOTIC</option>
+						<option value="DRUNKENNESS">DRUNKENNESS</option>
+						<option value="EMBEZZLEMENT">EMBEZZLEMENT</option>
+						<option value="EXTORTION">EXTORTION</option>
+						<option value="FAMILY OFFENSES">FAMILY OFFENSES</option>
+						<option value="FORGERY/COUNTERFEITING">FORGERY/COUNTERFEITING</option>
+						<option value="FRAUD">FRAUD</option>
+						<option value="GAMBLING">GAMBLING</option>
+						<option value="KIDNAPPING">KIDNAPPING</option>
+						<option value="LARCENY/THEFT">LARCENY/THEFT</option>
+						<option value="LIQUOR LAWS">LIQUOR LAWS</option>
+						<option value="LOITERING">LOITERING</option>
+						<option value="MISSING PERSON">MISSING PERSON</option>
+						<option value="NON-CRIMINAL">NON-CRIMINAL</option>
+						<option value="OTHER OFFENSES">OTHER OFFENSES</option>
+						<option value="PROSTITUTION">PROSTITUTION</option>
+						<option value="ROBBERY">ROBBERY</option>
+						<option value="RUNAWAY">RUNAWAY</option>
+						<option value="SECONDARY CODES">SECONDARY CODES</option>
+						<option value="SEX OFFENSES, FORCIBLE">SEX OFFENSES, FORCIBLE</option>
+						<option value="SEX OFFENSES, NON FORCIBLE">SEX OFFENSES, NON FORCIBLE</option>
+						<option value="STOLEN PROPERTY">STOLEN PROPERTY</option>
+						<option value="SUICIDE">SUICIDE</option>
+						<option value="SUSPICIOUS OCC">SUSPICIOUS OCC</option>
+						<option value="TRESPASS">TRESPASS</option>
+						<option value="VANDALISM">VANDALISM</option>
+						<option value="VEHICLE THEFT">VEHICLE THEFT</option>
+						<option value="WARRANTS">WARRANTS</option>
+						<option value="WEAPON LAWS">WEAPON LAWS</option>
+		  			</select>
+		  		</div>
+		  		</div>
+		  	</div>
 		</p>
  	</div>
 
@@ -112,6 +127,8 @@
 	var day_of_week;
 	var resolution;
 	var category;
+	var colorA = "#2786C2";
+	var colorB = "#C26327";
 
 	d3.json("scpd_incidents.json", function(error, data) {
 	 	// Add an svg element to the DOM
@@ -125,6 +142,15 @@
 		          .attr("width", width)
 		          .attr("height", height)
 		          .attr("xlink:href", "sf-map.svg");
+
+		var borderPath = svg.append("rect")
+		  // .attr("x", 0)
+		  // .attr("y", 0)
+		  .attr("height", height)
+		  .attr("width", width)
+		  .style("stroke", "gray")
+		  .style("fill", "none")
+		  .style("stroke-width", "4px");
 
 
 	 	if(error) return console.error(error);
@@ -143,7 +169,7 @@
 
 		function update(miles, AorB) {
 			// adjust the text on the range slider
-			d3.select("#nRadius" + AorB + "-value").text(miles + "Miles");
+			d3.select("#nRadius" + AorB + "-value").text(miles + " mile(s)");
 			d3.select("#nRadius" + AorB).property("value", miles).attr("value", miles);
 
 			  // update the circle radius
@@ -185,10 +211,10 @@
 				.attr("cx", p.x)
 				.attr("cy", p.y)
 				// .attr("transform", "translate(" + p.x + "," + p.y + ")")
-				.attr("r", "8px")
+				.attr("r", "5px")
 				.attr("id", "A")
 				.attr("class", "dot")
-				.attr("fill", "red")
+				.attr("fill", colorA)
 				.call(drag);
 
 				svg.append("circle")
@@ -199,7 +225,7 @@
 				.attr("id", "A_outer")
 				.attr("class", "dot")
 				.attr("fill", "none")
-				.attr("stroke", "red");	
+				.attr("stroke", colorA);	
 
 				update(1, "A");
 
@@ -208,10 +234,10 @@
 				.attr("cx", p.x)
 				.attr("cy", p.y)
 				// .attr("transform", "translate(" + p.x + "," + p.y + ")")
-				.attr("r", "8px")
+				.attr("r", "5px")
 				.attr("id", "B")
 				.attr("class", "dot")
-				.attr("fill", "blue")
+				.attr("fill", colorB)
 				.call(drag)
 
 				svg.append("circle")
@@ -222,7 +248,7 @@
 				.attr("id", "B_outer")
 				.attr("class", "dot")
 				.attr("fill", "none")
-				.attr("stroke", "blue");
+				.attr("stroke", colorB);
 
 				update(1, "B");	
 			}
@@ -267,10 +293,21 @@
 		.attr("data-id", function(d) {return d.IncidentNumber})
 		.attr("cx", function(d) {return projection(d.Location)[0]})
 		.attr("cy", function(d) {return projection(d.Location)[1]})
-		.attr("r", "4px")
+		.attr("r", "3px")
 		.attr("class", "crime")
 		.attr("fill", "TEAL")
+		//.append("svg:title")
 		// .attr("fill", function(d) {return color_scale(d.Category)});
+      $('svg circle.crime').tipsy({ 
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+          var d = this.__data__, desc = d.Description;
+          var time = d.Time, category = d.Category, date = d.Date;
+          return 'Date: ' + date + ' | Time: ' + time + ' | Category: ' + category + ' | Description: ' + desc;
+        }
+      });
+
 
 		circles.exit().remove();
 	}
