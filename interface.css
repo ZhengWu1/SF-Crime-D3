@@ -1,0 +1,24 @@
+/* Typography */
+
+body {
+	font-family: 'Source Sans Pro', Tahoma, sans-serif;
+	font-size: 13px;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+h4 {
+	font-weight: normal;
+}
+
+#user-control {
+	float: right;
+	height: 100%;
+	width: 40%;
+}
+
+body {
+/*	background-color: #F0EDE6;*/
+}
